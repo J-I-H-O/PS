@@ -13,7 +13,7 @@ int main() {
     stuff.push_back({weight, value});
   }
 
-  // col: 현재 무게 제한
+  // col: 현재 무게 제한, rowL 
   // 배낭의 무게 제한을 차례로 늘려가며 최대 
   for(int col = 1; col <= k; col++) {
     for(int row = 1; row <= n; row++) {
