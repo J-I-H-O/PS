@@ -43,7 +43,10 @@ int main() {
   for(int i = 1; i <= n; i++) {
     cout << switchStat[i] << " ";
     printCnt++;
-    if(printCnt == 20) cout << "\n";
+    if(printCnt == 20) {
+      cout << "\n";
+      printCnt = 0;
+    }
   }
 
   return 0;
