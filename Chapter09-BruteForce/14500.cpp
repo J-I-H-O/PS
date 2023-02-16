@@ -24,9 +24,7 @@ void dfs(int depth, int sum, int curR, int curC) {
 
     if(0 <= nxtR && nxtR < n && 0 <= nxtC && nxtC < m) {
       if(!visited[nxtR][nxtC]) {
-        //visited[nxtR][nxtC] = true;
         dfs(depth + 1, sum + board[nxtR][nxtC], nxtR, nxtC);
-        //visited[nxtR][nxtC] = false;  
       }
     }
   }
