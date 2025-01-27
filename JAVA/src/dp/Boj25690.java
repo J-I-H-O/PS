@@ -11,8 +11,8 @@ public class Boj25690 {
     /**
      * @formatter:off
      * - cost[i][0] : white, cost[i][1] : black
-     * - dp[i][0]: i번 노드를 white로 칠했을 때, i번 노드를 루트 노드로 갖는 서브 트리를 칠하는 최소 비용 dp[i][1]: i번 노드를
-     * - black으로 칠했을 때, i번 노드를 루트 노드로 갖는 서브 트리를 칠하는 최소 비용
+     * - dp[i][0]: i번 노드를 흰색으로 칠했을 때, i번 노드를 루트 노드로 갖는 서브 트리를 칠하는 최소 비용
+     * - dp[i][1]: i번 노드를 검정색으로 칠했을 때, i번 노드를 루트 노드로 갖는 서브 트리를 칠하는 최소 비용
      */
     static int n;
     static List<Integer>[] tree;
@@ -20,13 +20,14 @@ public class Boj25690 {
     static long[][] dp;
 
     static void dfs(int curNode) {
+        // 리프 노드로부터 상향식으로 서브 트리를 최소로 칠하는 비용 구하기
         dp[curNode][0] = costs[curNode][0];
         dp[curNode][1] = costs[curNode][1];
 
         for (int child : tree[curNode]) {
             dfs(child);
-            dp[curNode][0] += Math.min(dp[child][0], dp[child][1]);
-            dp[curNode][1] += dp[child][0];
+            dp[curNode][0] += Math.min(dp[child][0], dp[child][1]); // 현재 노드를 흰색으로 칠하는 경우, 자식 노드는 흰색 또는 검정색으로 칠할 수 있음. 이때 자식 노드를 루트 노드로 갖는 서브 트리 중 비용이 낮은 것을 하위 서브 트리로 선택
+            dp[curNode][1] += dp[child][0]; // 현재 노드를 검정색으로 칠하는 경우, 자식 노드는 흰색으로만 칠할 수 있음. 즉, 자식 노드를 루트 노드로 갖는 서브 트리 중 자식 노드가 흰색인 서브 트리를 선택
         }
     }
 
