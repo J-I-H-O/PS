@@ -19,16 +19,27 @@ public class Boj1806 {
         }
 
         int ans = N + 1;
-        int curSum = 0;
+        int curSum = nums[0];
         int left = 0, right = 0;
-        while (left <= right && right < N) {
+        while (left <= right) {
             if (curSum >= S) {
-                ans = Math.min(ans, right - left);
-                curSum -= nums[left++];
+                ans = Math.min(ans, right - left + 1);
+                curSum -= nums[left];
+                left++;
             } else {
-                curSum += nums[right++];
+                // 더이상 오른쪽으로 움직일 수 없어 무한루프 도는 것을 막기 위함
+                if (right + 1 >= N) {
+                    break;
+                }
+                curSum += nums[right + 1];
+                right++;
             }
         }
-        System.out.println(ans == N + 1 ? 0 : ans);
+
+        if (ans == N + 1) {
+            System.out.println(0);
+        } else {
+            System.out.println(ans);
+        }
     }
 }
