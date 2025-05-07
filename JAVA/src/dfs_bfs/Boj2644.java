@@ -19,12 +19,7 @@ public class Boj2644 {
             if (dist[next] != 0) {
                 continue;
             }
-
-            if (parent[cur] == parent[next]) {  // cur와 next가 형제 관계인 경우는 1
-                dist[next] = 1;
-            } else {
-                dist[next] = dist[cur] + 1; // cur와 next가 다른 부모를 갖는 경우는 촌수 + 1
-            }
+            dist[next] = dist[cur] + 1;
             dfs(next);
         }
     }
@@ -42,14 +37,12 @@ public class Boj2644 {
             graph[i] = new ArrayList<>();
         }
 
-        parent = new int[n + 1];
         for (int i = 0; i < m; i++) {
             input = br.readLine().split(" ");
             int x = Integer.parseInt(input[0]);
             int y = Integer.parseInt(input[1]);
             graph[x].add(y);
             graph[y].add(x);
-            parent[y] = x;
         }
 
         dist = new int[n + 1];
