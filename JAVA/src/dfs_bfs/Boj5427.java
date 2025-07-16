@@ -20,13 +20,11 @@ public class Boj5427 {
             Queue<int[]> fireQueue = new LinkedList<>();
 
             char[][] map = new char[h][w];
-            char[][] fireMap = new char[h][w];
             for (int i = 0; i < h; i++) {
                 char[] curLine = br.readLine().toCharArray();
                 for (int j = 0; j < w; j++) {
                     map[i][j] = curLine[j];
                     if (map[i][j] == '*') {
-                        fireMap[i][j] = '*';
                         fireQueue.add(new int[]{i, j, 1});
                     }
                     if (map[i][j] == '@') {
@@ -53,9 +51,9 @@ public class Boj5427 {
                         int nextFireC = curFireInfo[1] + dc[i];
 
                         if (nextFireR < 0 || nextFireR >= h || nextFireC < 0 || nextFireC >= w) continue;
-                        if (map[nextFireR][nextFireC] == '#' || fireMap[nextFireR][nextFireC] == '*') continue;
+                        if (map[nextFireR][nextFireC] == '#' || map[nextFireR][nextFireC] == '*') continue;
 
-                        fireMap[nextFireR][nextFireC] = '*';
+                        map[nextFireR][nextFireC] = '*';
                         fireQueue.add(new int[]{nextFireR, nextFireC, firePhase + 1});
                     }
                 }
@@ -77,7 +75,7 @@ public class Boj5427 {
                         int nextHumanC = curHumanC + dc[i];
 
                         if (nextHumanR < 0 || nextHumanR >= h || nextHumanC < 0 || nextHumanC >= w) continue;
-                        if (map[nextHumanR][nextHumanC] != '.' || fireMap[nextHumanR][nextHumanC] == '*') continue;
+                        if (map[nextHumanR][nextHumanC] != '.') continue;
 
                         map[nextHumanR][nextHumanC] = '@';
                         humanQueue.add(new int[]{nextHumanR, nextHumanC, humanPhase + 1});
