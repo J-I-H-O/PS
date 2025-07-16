@@ -42,6 +42,7 @@ public class Boj5427 {
             boolean isExitFound = false;
 
             // 더이상 이동할 수 없을 때 까지 반복
+            out:
             while (!humanQueue.isEmpty()) {
                 // 이번 차례에 번져야 하는 불들에 대해 번짐 처리
                 while (!fireQueue.isEmpty() && fireQueue.peek()[2] == firePhase) {
@@ -67,7 +68,7 @@ public class Boj5427 {
                     if (curHumanR == 0 || curHumanR == h - 1 || curHumanC == 0 || curHumanC == w - 1) {
                         isExitFound = true;
                         System.out.println(humanPhase);
-                        break;
+                        break out;
                     }
 
                     for (int i = 0; i < 4; i++) {
@@ -82,10 +83,6 @@ public class Boj5427 {
                     }
                 }
                 humanPhase++;
-
-                if (isExitFound) {
-                    break;
-                }
             }
             if (!isExitFound) {
                 System.out.println("IMPOSSIBLE");
